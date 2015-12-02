@@ -1,0 +1,5 @@
+production:
+
+development:
+  MERCHANT_KEY_ID:  'rzp_test_aFsD9MxwfYu8Zb'
+  MERCHANT_KEY_SECRET:  'Dj94J7gRWP73mCs6huHQjbxo'
