@@ -26,6 +26,9 @@ class OrdersController < ApplicationController
 
   def index
     @orders = Order.all
+    @success_orders=Order.where(:status => "captured")
+    @refunded_orders=Order.where(:status => "refunded")
+    @failed_orders=Order.where(:status => "failed")
   end
 
   private

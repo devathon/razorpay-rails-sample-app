@@ -1,12 +1,60 @@
-<div class="">
-<table border="1" class="order_details">
-<tr>
-<th>No</th><th>Payment Id</th><th>Payment status</th>
-<%@orders.each do |order|%>
-<tr>
-<td><%=order.id%></td>
-<td><%=link_to order.payment_id, order_path(order.id)%></td>
-<td><%=order.status%></td>
-<%end%>
-</table>
-</div>
+<div class="container">
+
+             <div class="container">
+                    <ul class="nav nav-tabs" id="tabs_space">
+                        <li class="active"><a data-toggle="tab" href="#successful"><i class="fa"></i> Successful </a></li>
+                        <li ><a data-toggle="tab" href="#refunded"><i class="fa"></i> Refunded </a></li>
+                        
+                        <li><a data-toggle="tab" href="#failed"><i class="fa"></i> Failed </a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div id="successful" class="tab-pane fade in active">
+                          <h3>Sucessful</h3>
+
+                          <table border="1" class="  table" >
+                              <tr>
+                              <th>No</th><th>Payment Id</th><th>Payment status</th>
+                              <%@success_orders.each do |order|%>
+                              <tr>
+                              <td><%=order.id%></td>
+                              <td><%=link_to order.payment_id, order_path(order.id)%></td>
+                              <%end%>
+                          </table>
+
+
+
+
+                        </div>
+                        <div id="refunded" class="tab-pane fade ">
+                          <h3>Refunded</h3>
+                            <table border="1" class="  table" >
+                              <tr>
+                              <th>No</th><th>Payment Id</th><th>Payment status</th>
+                              <%@refunded_orders.each do |order|%>
+                              <tr>
+                              <td><%=order.id%></td>
+                              <td><%=link_to order.payment_id, order_path(order.id)%></td>
+                              <%end%>
+                          </table>
+
+                       </div> 
+                        <div id="failed" class="tab-pane fade">
+                         
+                          <h3>Failed</h3>
+                          <table border="1" class="  table" >
+                              <tr>
+                              <th>No</th><th>Payment Id</th><th>Payment status</th>
+                              <%@failed_orders.each do |order|%>
+                              <tr>
+                              <td><%=order.id%></td>
+                              <td><%=link_to order.payment_id, order_path(order.id)%></td>
+                              <%end%>
+                          </table>
+
+                        </div>
+                    </div>
+                </div>
+
+
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
