@@ -20,9 +20,21 @@ $(document).ready(function(){
               mapInput.value = response.razorpay_payment_id;
               mapForm.appendChild(mapInput);
 
-              //document.body.appendChild(mapForm);
+              var mapInput2 = document.createElement("input");
+              mapInput2.type = "text";
+              mapInput2.name = "user_id";
+              mapInput2.value = "<%= "#{current_user.id}" %>";
 
-              //map = window.open("_self", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
+              var mapInput3 = document.createElement("input");
+              mapInput3.type = "text";
+              mapInput3.name = "product_id";
+              mapInput3.value = "<%= "#{@product.id}" %>";
+
+              
+
+              mapForm.appendChild(mapInput);
+              mapForm.appendChild(mapInput2);
+              mapForm.appendChild(mapInput3);
 
               mapForm.submit();
 
@@ -69,7 +81,7 @@ $(document).ready(function(){
     <div>
   </div>
 </div>
-
+<a class="btn btn-info" href="/auto">See Automatic checkout </a>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <style type="text/css">
   body{
