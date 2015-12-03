@@ -97,6 +97,7 @@ GEM
     nokogiri (1.6.7)
       mini_portile2 (~> 2.0.0.rc2)
     orm_adapter (0.5.0)
+    pg (0.18.3)
     pry (0.9.12.6)
       coderay (~> 1.0)
       method_source (~> 0.8)
@@ -184,6 +185,7 @@ DEPENDENCIES
   figaro
   jbuilder (~> 2.0)
   jquery-rails
+  pg
   pry
   rails (= 4.2.4)
   razorpay
