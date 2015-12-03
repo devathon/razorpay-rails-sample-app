@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+
   root 'products#index'
-
   devise_for :users
-
   post '/purchase' => 'orders#purchase_status'
+  resources :orders, only: [:index,:show]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

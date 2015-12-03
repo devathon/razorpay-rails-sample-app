@@ -11,12 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202105916) do
+ActiveRecord::Schema.define(version: 20151203091239) do
 
-  create_table "order_items", force: :cascade do |t|
+  create_table "orders", force: :cascade do |t|
     t.integer  "product_id"
     t.integer  "price"
-    t.boolean  "status"
+    t.string   "status"
+    t.string   "payment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 20151202105916) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
