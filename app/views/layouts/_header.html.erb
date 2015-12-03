@@ -13,6 +13,8 @@
     
     <nav>
       <ul class="nav navbar-nav navbar-right">
+  <li><%= link_to "Product Page", root_path%></li> 
+  <li><%= link_to "orders", orders_path%></li>    
         <% if user_signed_in? %>
   <li><%= link_to current_user.email %></li>
   <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>

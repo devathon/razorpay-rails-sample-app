@@ -1,0 +1,12 @@
+<div class="">
+<table border="1" class="order_details">
+<tr>
+<th>No</th><th>Payment Id</th><th>Payment status</th>
+<%@orders.each do |order|%>
+<tr>
+<td><%=order.id%></td>
+<td><%=link_to order.payment_id, order_path(order.id)%></td>
+<td><%=order.status%></td>
+<%end%>
+</table>
+</div>
