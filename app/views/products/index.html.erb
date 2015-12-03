@@ -1,8 +1,91 @@
-<div class="product">
-<ul style="list-style-type:none">
-<li><strong>Title : </strong><%=@product.title %></li>
-<li><strong>Price : </strong><%=@product.price %></li>
-<li><strong>Seller Name : </strong><%=@seller.name %></li>
-<li><strong>Description : </strong><%=@product.description %></li>
-</li>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Actor" rel="stylesheet" type="text/css">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+$(document).ready(function(){
+  var options = {
+      "key": "<%= "#{Figaro.env.MERCHANT_KEY_ID}" %>",
+      "amount": "2000",
+      "name": "Merchant Name",
+      "description": "Purchase Description",
+      "image": "/images/product.jpg",
+      "handler": function (response){
+              var mapForm = document.createElement("form");
+              mapForm.target = "_self";
+              mapForm.method = "POST"; // or "post" if appropriate
+              mapForm.action = "/purchase";
+
+              var mapInput = document.createElement("input");
+              mapInput.type = "text";
+              mapInput.name = "razorpay_payment_id";
+              mapInput.value = response.razorpay_payment_id;
+              mapForm.appendChild(mapInput);
+
+              //document.body.appendChild(mapForm);
+
+              //map = window.open("_self", "Map", "status=0,title=0,height=600,width=800,scrollbars=1");
+
+              mapForm.submit();
+
+      },
+      "prefill": {
+          "name": "Harshil Mathur",
+          "email": "harshil@razorpay.com"
+      },
+      "notes": {
+          "address": "Hello World"
+      },
+      "theme": {
+          "color": "#F37254"
+      }
+  };
+  var rzp1 = new Razorpay(options);
+
+  $("#rzp-button1").click(function(e){
+      rzp1.open();
+      e.preventDefault();
+  });
+
+});
+</script>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+    </div>
+
+    <div class="col-xs-4">
+      <div class="product-place">
+      <img src="/images/product.jpg" width="230px" height="219px">
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="product-summary">
+        <h3>Fine Tshirt</h3>
+        <div class="rating"><img src="/images/rating.png"> 5 <span style='text-transform: uppercase;'>reviews</span></div>
+        <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum tincidunt libero nec imperdiet. Etiam sed malesuada dolor. Integer id ante ut urna pretium aliquet et et quam. Fusce tempor ultricies velit non finibus. Nullam lacus nulla, vehicula vitae pharetra nec, vestibulum id odio. Nunc quis sapien vestibulum, vulputate ipsum nec, consequat erat. Nunc interdum pharetra commodo. Nullam blandit id neque id ultrices. Proin quis efficitur mauris.</p>
+        <div class="pay">
+          <input id="rzp-button1" type="button" value="Pay with razorpay" class="razorpay-payment-button">
+        </div>
+      </div>
+    <div>
+  </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<style type="text/css">
+  body{
+    font-family: "Open Sans"
+  }
+  .razorpay-payment-button{
+  background: url('/images/PayWithRzp.png') center no-repeat;
+  background-size: contain;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  font-size: 0;
+  height: 36px;
+  width: 230px;
+  padding: 0;
+  cursor: pointer;
+}
+
+</style>
