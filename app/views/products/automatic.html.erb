@@ -1,0 +1,59 @@
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Actor" rel="stylesheet" type="text/css">
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2">
+    </div>
+
+    <div class="col-xs-4">
+      <div class="product-place">
+      <img src="/images/product2.jpeg" width="230px" height="219px">
+      </div>
+    </div>
+    <div class="col-xs-4">
+      <div class="product-summary">
+        <h3>Fine HeadPhone</h3>
+        <div class="rating"><img src="/images/rating.png"> 5 <span style='text-transform: uppercase;'>reviews</span></div>
+        <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc fermentum tincidunt libero nec imperdiet. Etiam sed malesuada dolor. Integer id ante ut urna pretium aliquet et et quam. Fusce tempor ultricies velit non finibus. Nullam lacus nulla, vehicula vitae pharetra nec, vestibulum id odio. Nunc quis sapien vestibulum, vulputate ipsum nec, consequat erat. Nunc interdum pharetra commodo. Nullam blandit id neque id ultrices. Proin quis efficitur mauris.</p>
+
+        <form action="/purchase" method="POST">
+        <script
+            src="https://checkout.razorpay.com/v1/checkout.js"
+            data-key="<%= "#{Figaro.env.MERCHANT_KEY_ID}" %>"
+            data-amount="5000"
+            data-name="Ravikumar Auto-check"
+            data-description="Purchase Description"
+            data-image="/images/product2.jpeg"
+            data-prefill.name="Harshil Mathur"
+            data-prefill.email="support@razorpay.com"
+            data-theme.color="#F37254"
+        ></script>
+        <input type="hidden" value="<%= "#{@product.id}" %>" name="product_id">
+        <input type="hidden" value="<%= "#{current_user.id}" %>" name="user_id">
+        
+        </form>
+      </div>
+    <div>
+  </div>
+</div>
+<style type="text/css">
+  body{
+    font-family: "Open Sans"
+  }
+  .razorpay-payment-button{
+  background: url('/images/PayWithRzp.png') center no-repeat;
+  background-size: contain;
+  box-shadow: none;
+  border: none;
+  outline: none;
+  font-size: 0;
+  height: 36px;
+  width: 230px;
+  padding: 0;
+  cursor: pointer;
+}
+
+</style>
+
+
+<a class="btn btn-info" href="/">See manual checkout </a>
