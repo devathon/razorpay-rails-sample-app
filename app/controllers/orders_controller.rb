@@ -16,11 +16,15 @@ class OrdersController < ApplicationController
   end
 
   def index
-    @orders = Order.filter(filter_params)
+    @orders = Order.filter(filter_params).page(params[:page]).per(10)
   end
 
   private
     def payment_params
+      if params[:payment_id].nil?
+        params.merge!(payment_id: params[:razorpay_payment_id]) 
+        params.except!(:razorpay_payment_id)
+      end
       params.permit(:payment_id, :user_id, :product_id, :price)
     end
 

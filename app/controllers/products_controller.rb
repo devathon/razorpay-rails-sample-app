@@ -1,12 +1,16 @@
 class ProductsController < ApplicationController
   def index
-  	@product = Product.first
+  	@products = Product.all.page(params[:page]).per(10)
   	# @seller = Seller.find_by_id(@product.seller_id)
   end
 
-  def automatic
-    @product = Product.first
-    # @seller = Seller.find_by_id(@product.seller_id)
+  def show 
+    @product = Product.find_by(id: params['id'])
+    if params['mode'] == 'automatic'
+      render 'automatic'
+    else
+      render 'manual'
+    end
   end
 
 end

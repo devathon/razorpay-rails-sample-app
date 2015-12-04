@@ -1,19 +1,23 @@
 <div class="container">
     <ul class="nav nav-tabs" id="tabs_space">
-      <li class="active">
+      <input type="hidden" id="target_search" value="<%= params[:status] unless params[:status].nil? %>">
+      <li id="authorized">
         <%= link_to "Authorized", orders_path({status: "authorized"}) %>
       </li>
-      <li>
+      <li id="captured">
         <%= link_to "Captured", orders_path({status: "captured"}) %>
       </li>
-      <li>
+      <li id="refunded">
         <%= link_to "Refunded", orders_path({status: "refunded"}) %>
+      </li>
+      <li id="error">
         <%= link_to "Failed", orders_path({status: "error"}) %>
       </li>
     </ul>
 
     <div class="tab-content">
       <div class="tab-pane fade in active">
+        <br>
         <table border="1" class="  table" >
           <tr>
           <th>No</th><th>Payment Id</th>
@@ -23,10 +27,27 @@
             <td><%=link_to order.payment_id, order_path(order.id)%></td>
           <%end%>
         </table>
+
+        <%= paginate @orders %>
+
+
       </div>
     </div>
 </div>
 
-
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
-
+<script type="text/javascript">
+  $(document).ready(function(){
+    var current=$("#target_search").val();
+    var is_set=0;
+    $("#tabs_space li").each(function(){
+      if ($(this).attr('id') == current){
+        $(this).addClass('active');
+        is_set = 1;
+      }
+        
+    });
+    if (is_set==0){
+      $("#authorized").addClass('active');
+    }
+  });
+</script>

@@ -5,7 +5,6 @@ class Order < ActiveRecord::Base
   [:authorized, :captured, :refunded, :error].each do |scoped_key|
     scope scoped_key, -> { where('LOWER(status) = ?', scoped_key.to_s.downcase) }
   end
-
   class << self
     def process_razorpayment(params)
       amount = get_payment_amount(params[:payment_id])
