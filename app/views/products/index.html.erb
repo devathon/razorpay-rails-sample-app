@@ -9,35 +9,32 @@ $(document).ready(function(){
       "description": "Purchase Description",
       "image": "/images/product.jpg",
       "handler": function (response){
-              var mapForm = document.createElement("form");
-              mapForm.target = "_self";
-              mapForm.method = "POST"; // or "post" if appropriate
-              mapForm.action = "/purchase";
+        var mapForm = document.createElement("form");
+        mapForm.target = "_self";
+        mapForm.method = "POST"; // or "post" if appropriate
+        mapForm.action = "/purchase";
 
-              var mapInput = document.createElement("input");
-              mapInput.type = "text";
-              mapInput.name = "razorpay_payment_id";
-              mapInput.value = response.razorpay_payment_id;
-              mapForm.appendChild(mapInput);
+        var mapInput = document.createElement("input");
+        mapInput.type = "text";
+        mapInput.name = "payment_id";
+        mapInput.value = response.razorpay_payment_id;
+        mapForm.appendChild(mapInput);
 
-              var mapInput2 = document.createElement("input");
-              mapInput2.type = "text";
-              mapInput2.name = "user_id";
-              mapInput2.value = "<%= "#{current_user.id}" %>";
+        var mapInput2 = document.createElement("input");
+        mapInput2.type = "text";
+        mapInput2.name = "user_id";
+        mapInput2.value = "<%= "#{current_user.id}" %>";
 
-              var mapInput3 = document.createElement("input");
-              mapInput3.type = "text";
-              mapInput3.name = "product_id";
-              mapInput3.value = "<%= "#{@product.id}" %>";
+        var mapInput3 = document.createElement("input");
+        mapInput3.type = "text";
+        mapInput3.name = "product_id";
+        mapInput3.value = "<%= "#{@product.id}" %>";
 
-              
+        mapForm.appendChild(mapInput);
+        mapForm.appendChild(mapInput2);
+        mapForm.appendChild(mapInput3);
 
-              mapForm.appendChild(mapInput);
-              mapForm.appendChild(mapInput2);
-              mapForm.appendChild(mapInput3);
-              
-
-              mapForm.submit();
+        mapForm.submit();
 
       },
       "prefill": {
@@ -83,7 +80,6 @@ $(document).ready(function(){
   </div>
 </div>
 <a class="btn btn-info" href="/auto">See Automatic checkout </a>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <style type="text/css">
   body{
     font-family: "Open Sans"
