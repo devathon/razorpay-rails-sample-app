@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
 
   private
     def payment_params
+        params = params.to_hash
       if params[:payment_id].nil?
         params.merge!(payment_id: params[:razorpay_payment_id]) 
         params.except!(:razorpay_payment_id)
