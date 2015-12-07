@@ -1,4 +1,5 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400|Actor" rel="stylesheet" type="text/css">
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 $(document).ready(function(){
   var options = {
@@ -47,9 +48,10 @@ $(document).ready(function(){
           "color": "#F37254"
       }
   };
-  var rzp1 = new Razorpay(options);
+  
 
   $("#rzp-button1").click(function(e){
+    var rzp1 = new Razorpay(options);
       rzp1.open();
       e.preventDefault();
   });
