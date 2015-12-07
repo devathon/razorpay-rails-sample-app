@@ -1,36 +1,35 @@
 class OrdersController < ApplicationController
+  include Order::RazorpayConcern
   skip_before_action :verify_authenticity_token
   def purchase_status
-    @payment_id = payment_params['razorpay_payment_id']
-    @amount = get_payment_amount(@payment_id)
-    payment_status=get_payment_status(@payment_id)
-    @status = ""
-    if payment_status 
-      flash.now[:alert] = "Payment failed try again"
-      redirect_to root_url
-      @status = "failed"
-    else
-      captured=capture_payment(@payment_id)
-      flash.now[:notice] = "Payment successful"
-      @status = "successful"
+    begin
+      @order = Order.process_razorpayment(payment_params)
+      redirect_to :action => "show", :id => @order.id
+    rescue Exception => e
+      # use case either refund immediatly or notify admin / client.
+      redirect_to root_path, flash: "Unable to process payment, please check with our customer service."
     end
-    @order = Order.create(product_id: payment_params[:product_id],payment_id: payment_params[:razorpay_payment_id],status: @status,price: @amount)
-    #render 'order_status'
-    redirect_to :action => "show", :id => @order.id
   end
 
   def show
     @order = Order.find_by_id(params[:id])
-    @product = Product.find_by_id(@order.product_id)
   end
 
   def index
-    @orders = Order.all
+    @orders = Order.filter(filter_params).page(params[:page]).per(10)
   end
 
   private
     def payment_params
-      params.permit(:razorpay_payment_id, :user_id, :product_id,:price)
+      unless params[:payment_id]
+        params.merge!(payment_id: params[:razorpay_payment_id]) 
+        params.except!(:razorpay_payment_id)
+      end
+      params.permit(:payment_id, :user_id, :product_id, :price)
+    end
+
+    def filter_params
+      params.permit(:status, :page)
     end
 
 end
