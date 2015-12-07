@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
   include Order::RazorpayConcern
   belongs_to :product
+  belongs_to :user
 
   [:authorized, :captured, :refunded, :error].each do |scoped_key|
     scope scoped_key, -> { where('LOWER(status) = ?', scoped_key.to_s.downcase) }
@@ -10,7 +11,7 @@ class Order < ActiveRecord::Base
       amount = get_payment_amount(params[:payment_id])
       captured = capture_payment(params[:payment_id])
       status = get_payment_status(params[:payment_id])
-      params.merge!({status: status, price: amount}) && params.except!(:user_id)
+      params.merge!({status: status, price: amount})
       return Order.create(params)
     end
 
