@@ -45,25 +45,22 @@ $(document).ready(function(){
           "address": "Hello World"
       },
       "theme": {
-          "color": "#F37254"
+          "color": "#198F69"
       }
   };
-<<<<<<< HEAD
-
-  $("#rzp-button1").click(function(e){
-      var rzp1 = new Razorpay(options);
-=======
-  
-
   $("#rzp-button1").click(function(e){
     var rzp1 = new Razorpay(options);
->>>>>>> jnan-dev
       rzp1.open();
       e.preventDefault();
   });
 
 });
 </script>
+<div class="btn-group">
+     <a href="#" class="btn btn-primary active">Manual </a>
+    <a href="#" class="btn btn-primary"><i class="fa fa-chevron-circle-down"></i></a>
+   <a href="/" class="btn btn-primary">Automatic</a>
+  </div>
 <div class="container">
   <div class="row">
     <div class="col-lg-2">
@@ -86,8 +83,6 @@ $(document).ready(function(){
     <div>
   </div>
 </div>
-<%= link_to "See Auto checkout", product_path(@product, mode: "automatic"), class: "btn btn-info" %>
-
 <style type="text/css">
   body{
     font-family: "Open Sans"
@@ -104,3 +99,11 @@ $(document).ready(function(){
   padding: 0;
   cursor: pointer;
 }
+
+</style>
+    <script type="text/javascript">
+      $(".btn-group a:nth-child(3)").hide();
+      $(".btn-group").hover(function(){
+        $(".btn-group a:nth-child(3)").show();  
+      });
+    </script>
