@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   #get '/auto' => 'products#automatic'
   devise_for :users
   post '/purchase' => 'orders#purchase_status'
-  resources :orders, only: [:index,:show]
+  get "refund/:id", to: "orders#refund"
+  resources :orders, only: [:index,:show] 
   resources :products
 end

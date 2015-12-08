@@ -8,11 +8,19 @@ class Order < ActiveRecord::Base
   end
   class << self
     def process_razorpayment(params)
-      amount = get_payment_amount(params[:payment_id])
-      captured = capture_payment(params[:payment_id])
-      status = get_payment_status(params[:payment_id])
+      amount = fetch_payment(params[:payment_id]).amount
+      captured = fetch_payment(params[:payment_id]).capture({amount: amount})
+      status = fetch_payment(params[:payment_id]).status
       params.merge!({status: status, price: amount})
       return Order.create(params)
+    end
+
+    def process_refund(payment_id)
+      binding.pry
+      fetch_payment(payment_id).refund() #unless fetch_payment(payment_id).status == "refunded"
+      record = Order.find_by_payment_id(payment_id)
+      record.update_attributes(status: fetch_payment(payment_id).status)
+      return record
     end
 
     def filter(params)
