@@ -16,13 +16,12 @@ class OrdersController < ApplicationController
   end
   
   def index
-    @orders = Order.filter(filter_params).page(params[:page]).per(5)
+    @orders = Order.filter(filter_params).page(params[:page]).per(20)
   end
 
   def refund
     payment_id = Order.find_by_id(params[:id]).payment_id
     @order = Order.process_refund(payment_id)
-    #redirect_to :action => "show", :id => @order.id
     redirect_to :action => "show", :id => @order.id
   end
 
