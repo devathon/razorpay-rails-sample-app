@@ -3,10 +3,7 @@ class ProductsController < ApplicationController
   	#@products = Product.all.page(params[:page]).per(10)
   	# @seller = Seller.find_by_id(@product.seller_id)
     @product=Product.first
-<<<<<<< HEAD
-=======
     @product2=Product.second
->>>>>>> jnan-dev
   end
 
   def show 
