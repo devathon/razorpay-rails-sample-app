@@ -1,0 +1,13 @@
+<tr>
+  <td>
+    <%= order.id %>
+  </td>
+  <td>
+    <%= link_to order.payment_id, order_path(order) %>
+  </td>
+  <%if params[:status]== "captured" %>
+    <td>
+      <%= link_to "refund",action: "refund",id: order %>
+    </td>
+  <%end%>
+</tr>

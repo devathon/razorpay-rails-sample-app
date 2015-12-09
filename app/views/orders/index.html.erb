@@ -20,20 +20,13 @@
         <br>
         <table class="table table-striped table-bordered table-hover" >
           <tr>
-          <th>No</th><th>Payment Id</th>
-          <%if params[:status] == "captured"%>
-          <th>Refund Payment</th>
-          <%end%>
-          </tr>
-          <% @orders.each do |order|%>
-            <tr>
-            <td><%=order.id%></td>
-            <td><%=link_to order.payment_id, order_path(order)%></td>
-            <%if params[:status]== "captured"%>
-            <td><%=link_to "refund",action: "refund",id: order%></td>
+            <th>No</th>
+            <th>Payment Id</th>
+            <%if params[:status] == "captured"%>
+              <th>Refund Payment</th>
             <%end%>
-            </tr>
-          <%end%>
+          </tr>
+          <%= render @orders %>
         </table>
         <%= paginate @orders %>
       </div>

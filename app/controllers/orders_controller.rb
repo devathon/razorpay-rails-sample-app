@@ -27,11 +27,9 @@ class OrdersController < ApplicationController
 
   private
     def payment_params
-      unless params[:payment_id]
-        params.merge!(payment_id: params[:razorpay_payment_id]) 
-        params.except!(:razorpay_payment_id)
-      end
-      params.permit(:payment_id, :user_id, :product_id, :price)
+      p = params.permit(:payment_id, :user_id, :product_id, :price, :razorpay_payment_id)
+      p.merge!({payment_id: p.delete(:razorpay_payment_id) || p[:payment_id]})
+      p
     end
 
     def filter_params
