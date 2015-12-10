@@ -13,7 +13,6 @@
         <h3><%= @product.title %></h3>
         <div class="rating"><img src="/images/rating.png"> 5 <span style='text-transform: uppercase;'>reviews</span></div>
         <p class="description"><%= @product.description %></p>
-        <!-- automatic checkout -->
         <h3>Automatic checkout</h3>
         <form action="/purchase" method="POST">
         <script
@@ -33,7 +32,6 @@
         <input type="hidden" value="<%= "#{@product.id}" %>" name="product_id">
         <input type="hidden" value="<%= "#{current_user.id}" %>" name="user_id">
         </form><br>
-        <!-- manual checkout -->
         <h3>Manual checkout</h3>
         <input id="rzp-button1" type="button" value="Pay with razorpay" class="razorpay-payment-button">
       </div>
