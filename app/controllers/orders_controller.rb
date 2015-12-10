@@ -1,13 +1,12 @@
 class OrdersController < ApplicationController
-  include Order::RazorpayConcern
   skip_before_action :verify_authenticity_token
   def purchase_status
     begin
       @order = Order.process_razorpayment(payment_params)
       redirect_to :action => "show", :id => @order.id
-    rescue Exception => e
-      # use case either refund immediatly or notify admin / client.
-      redirect_to root_path, flash: "Unable to process payment, please check with our customer service."
+    rescue Exception
+      flash[:error] = "Unable to process payment."
+      redirect_to root_path
     end
   end
 

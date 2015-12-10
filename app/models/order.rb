@@ -6,17 +6,24 @@ class Order < ActiveRecord::Base
   [:authorized, :captured, :refunded, :error].each do |scoped_key|
     scope scoped_key, -> { where('LOWER(status) = ?', scoped_key.to_s.downcase) }
   end
+
   class << self
     def process_razorpayment(params)
-      amount = fetch_payment(params[:payment_id]).amount
-      captured = fetch_payment(params[:payment_id]).capture({amount: amount})
+      product = Product.find(params[:product_id])
+      razorpay_pmnt_obj = fetch_payment(params[:payment_id])
       status = fetch_payment(params[:payment_id]).status
-      params.merge!({status: status, price: amount})
-      return Order.create(params)
+      if status == "authorized"
+        razorpay_pmnt_obj.capture({amount: product.price})
+        razorpay_pmnt_obj = fetch_payment(params[:payment_id])
+        params.merge!({status: razorpay_pmnt_obj.status, price: product.price})
+        Order.create(params)
+      else
+        raise StandardError, "UNable to capture payment"
+      end
     end
 
     def process_refund(payment_id)
-      fetch_payment(payment_id).refund()
+      fetch_payment(payment_id).refund
       record = Order.find_by_payment_id(payment_id)
       record.update_attributes(status: fetch_payment(payment_id).status)
       return record
