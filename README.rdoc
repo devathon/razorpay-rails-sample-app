@@ -1,25 +1,7 @@
 == Razorpay Rails Sample App
 
-Rails sample app for integrating Razorpay API. Here is the demo[http://razorpay-sample.herokuapp.com/]
+Rails sample app for integrating Razorpay API. Here is the demo[http://razorpay-sample.herokuapp.com/], this app make use of ruby gem razorpay-ruby[https://github.com/razorpay/razorpay-ruby]
 
-=== Installation
-Put this line in your Gemfile:
-  gem 'razorpay'
-And then execute:
-  $ bundle install
-Or install it yourself as:
-  $ gem install razorpay
-
-
-=== Setup
-You need Razorpay Merchant key and secret to use Razorpay API, to get sign up here[https://dashboard.razorpay.com/#/access/signup]
-
-You can find your API keys at here[https://dashboard.razorpay.com/#/app/keys].
-
-Create a file at +config/initializers/razorpay.rb+ and insert
-  Razorpay.setup("merchant_key_id", "merchant_key_secret")
-  
-=== Usage
 
 ==== Checkout form
 We can make the payment by two ways, either using simple form or javascript. see docs[https://docs.razorpay.com/docs/checkout-form]
@@ -44,4 +26,4 @@ You can checkout all entities returned by the Razorpay here[https://docs.razorpa
 
 
 === Source
-The reference used for this app https://docs.razorpay.com/v1/docs
+The reference used for this app https://docs.razorpay.com/v1/docs, https://github.com/razorpay/razorpay-ruby
