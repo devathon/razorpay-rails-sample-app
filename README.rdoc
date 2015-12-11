@@ -35,9 +35,9 @@ or see here +/app/views/products/index.html.erb+
     Razorpay::Payment.fetch(payment_id).capture({amount: product_price})
 * ==== Refund
     Razorpay::Payment.fetch(payment_id).refund
-    Razorpay::Payment.fetch("pay_29QQoUBi66xm2f").refund({amount: refund_amount})
+    Razorpay::Payment.fetch(payment_id).refund({amount: refund_amount})
 * ==== Refunds
-    Razorpay::Payment.fetch("pay_29QQoUBi66xm2f").refunds.all
+    Razorpay::Payment.fetch(payment_id).refunds.all
     Razorpay::Payment.fetch(payment_id).refunds.all({from:Timestamp,to:Timestamp,count:2,skip:1})
   
 You can checkout all entities returned by the Razorpay here[https://docs.razorpay.com/docs/return-objects]
