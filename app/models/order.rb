@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  include Order::RazorpayConcern
+  include OrderConcerns::Razorpay
   belongs_to :product
   belongs_to :user
 
