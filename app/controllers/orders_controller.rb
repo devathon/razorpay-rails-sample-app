@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
       @order = Order.process_razorpayment(payment_params)
       redirect_to :action => "show", :id => @order.id
     rescue Exception
-      flash[:error] = "Unable to process payment."
+      flash[:alert] = "Unable to process payment."
       redirect_to root_path
     end
   end

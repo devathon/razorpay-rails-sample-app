@@ -1,5 +1,4 @@
-module OrderConcerns
-  module Razorpay
+module OrderConcerns::Razorpay
     extend ActiveSupport::Concern
     included do
       class << self
@@ -7,6 +6,5 @@ module OrderConcerns
           Razorpay::Payment.fetch(raz_payment_id)
         end
       end
-    end
   end
 end
